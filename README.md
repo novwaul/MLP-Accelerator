@@ -64,7 +64,7 @@ The Systolic Array uses memory addresses from 0x4000 to 0x5000 and is composed o
 
 ### Data Compression
 
-All data entering the Systolic Array is extracted from the 9~2 bits of the original 32-bit data, concatenating LSB 1. Therefore, the Scratch Pad also stores only the 9~2 bits of the 32-bit data. The intermediate output calculated by the Systolic Array is 18 bits, but since the storage size is set to 9 bits, a compression process is necessary. If the MSB of the 18-bit data is 1, all 9 bits are set to 1 (Maximum Value), otherwise, the data is stored by adding the 8th bit value to the 17~9 bits of data (Rounding).
+All data entering the Systolic Array is extracted from the 9~2 bits of the original 32-bit data, concatenating LSB 1. Therefore, the Scratch Pad also stores only the 9 ~ 2 bits of the 32-bit data. The intermediate output calculated by the Systolic Array is 18 bits, but since the storage size is set to 9 bits, a compression process is necessary. If the MSB of the 18-bit data is 1, all 9 bits are set to 1 (Maximum Value), otherwise, the data is stored by adding the 8th bit value to the 17 ~ 9 bits of data (Rounding).
 
 ## Performance Evaluation
 All the results are based on PnR Report. Confirmed that accuracy, power consumption, area, and mcycle are in a trade-off relationship.
