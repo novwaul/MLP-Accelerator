@@ -1,6 +1,7 @@
 # MNIST Accelerator
 <p align="center">
 <img src=https://github.com/novwaul/MNIST-Accelerator/assets/53179332/e5473804-e3cc-4958-ba5a-be8593f5d748>
+</p>
 
 <p align="center">
 The MNIST Classifier for Acceleration
@@ -24,7 +25,15 @@ We aimed to adjust the baseline environment to maintain significant accuracy and
 After completing PnR, we aimed to obtain results to ensure that Team 15's design operates effectively within the maximum metal available in the given process.
 
 ## Technique
+
+<p align="center">
+<img src=https://github.com/novwaul/MNIST-Accelerator/assets/53179332/4c8b91e2-b310-467f-bcd3-c8313822cb30>
+</p>
+
 We implemented a Systolic Array and Scratch Pad, both managed by software using unused instructions as control commands. Additionally, data compression was used to reduce the bit size required for data operations and storage.
+
+
+
 
 ### Software
 Based on the baseline software, we modified the code to process four images simultaneously in the Systolic Array. All biases were managed in the Scratch Pad, and the inputs and outputs of Layer 1 and Layer 2, and the inputs of Layer 3 were stored in the Scratch Pad. As the inputs of the previous layer are not needed in the current layer, the Scratch Pad was managed by overwriting the input of the previous layer with the output of the current layer. Lastly, the code was modified to output control commands during compilation to control the Systolic Array and Scratch Pad as intended.
@@ -54,6 +63,7 @@ The Systolic Array uses memory addresses from 0x4000 to 0x5000 and is composed o
 - **MULHU**: Converts negative values to zero in the Systolic Array PE (ACT)
 
 ### Data Compression
+
 All data entering the Systolic Array is extracted from the 9~2 bits of the original 32-bit data, concatenating LSB 1. Therefore, the Scratch Pad also stores only the 9~2 bits of the 32-bit data. The intermediate output calculated by the Systolic Array is 18 bits, but since the storage size is set to 9 bits, a compression process is necessary. If the MSB of the 18-bit data is 1, all 9 bits are set to 1 (Maximum Value), otherwise, the data is stored by adding the 8th bit value to the 17~9 bits of data (Rounding).
 
 ## Performance Evaluation
